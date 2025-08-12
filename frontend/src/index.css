@@ -1,0 +1,34 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Prata&display=swap'); */
+@import "tailwindcss";
+
+a.active hr{
+    display: block;
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-black text-white px-8 py-3 font-medium rounded-full hidden md:block hover:bg-violet-400 hover:text-black transition-all duration-300 ease-in-out;
+  }
+}
+
+*{
+  font-family: Outfit;
+}
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+.prata-regular {
+  font-family: "Prata", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* for small screen sidebar  */
+@media (max-width: 640px){
+  a.active{
+    background-color: black;
+    color: white;
+  }
+}
