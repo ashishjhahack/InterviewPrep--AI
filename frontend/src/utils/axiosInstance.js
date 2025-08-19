@@ -57,6 +57,9 @@ axiosInstance.interceptors.response.use(
         } else if (error.response && error.response.status === 500) {
             // Handle server errors
             console.error('Server error - please try again later');
+        } else if (error.response && error.response.status === 404) {
+            // Handle Not Found errors
+            console.error(`Error 404: The requested resource at ${error.config.method.toUpperCase()} ${error.config.url} was not found.`);
         } 
         else if (error.code === 'ECONNABORTED') {
             // Handle timeout errors

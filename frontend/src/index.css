@@ -7,7 +7,7 @@ a.active hr{
 
 @layer components {
   .btn-primary {
-    @apply bg-black text-white px-8 py-3 font-medium rounded-full hidden md:block hover:bg-violet-400 hover:text-black transition-all duration-300 ease-in-out;
+    @apply bg-black text-white px-8 py-3 font-medium rounded-full hover:bg-violet-400 hover:text-black transition-all duration-300 ease-in-out;
   }
 }
 

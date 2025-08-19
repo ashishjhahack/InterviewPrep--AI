@@ -1,12 +1,21 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, useNavigate, Link } from 'react-router'
 import {assets} from '../assests/assets'
+import { UserContext } from '../context/userContext'
 
 const Navbar = () => {
   const navigate = useNavigate();
 
   const [showMenu, setShowMenu] = useState(false);     // this means logged out
   const [token, setToken] = useState(false);   // When we have tokken means we logged in
+  const { user, updateUser } = useContext(UserContext);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    updateUser(null);
+    navigate("/login");
+  };
+
   return (
     <div className='flex items-center justify-between text-sm py-4 mb-5 border-b border-b-gray-400'>
       <Link to={'/'} className='flex text-gray-700 font-bold text-2xl whitespace-nowrap'>InterviewPrep-AI</Link>
@@ -30,7 +39,7 @@ const Navbar = () => {
       </ul>
       <div className='flex item-center gap-4'>
         {
-            token
+            user
             ? <div className='flex item-center gap-2 cursor-pointer group relative'> 
                 <img className='w-8 rounded-full' src= {assets.profile_pic} alt="" />
                 <img className='w-2.5' src={assets.dropdown_icon} alt="" />
@@ -38,7 +47,7 @@ const Navbar = () => {
                     <div className='min-w-48 bg-stone-100 rounded flex flex-col gap-4 p-4'>
                         <p onClick={()=> navigate('/my-profile')} className='hover:text-black cursor-pointer'>My Profile</p>
                         <p onClick={()=> navigate('/my-interviews')} className='hover:text-black cursor-pointer'>My Appointments</p>
-                        <p onClick={()=> setToken(false)} className='hover:text-black cursor-pointer'>Logout</p>
+                        <p onClick={()=> handleLogout()} className='hover:text-black cursor-pointer'>Logout</p>
                     </div>
                 </div>
             </div>
