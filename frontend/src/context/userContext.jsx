@@ -22,7 +22,11 @@ const UserProvider = ({ children }) => {
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
-        localStorage.removeItem("token");
+        // Only clear token if it's really unauthorized
+        if (error.response?.status === 401) {
+          localStorage.removeItem("token");
+        }
+
       } finally {
         setLoading(false);
       }
