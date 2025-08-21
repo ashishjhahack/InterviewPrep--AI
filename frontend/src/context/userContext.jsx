@@ -11,29 +11,25 @@ const UserProvider = ({ children }) => {
   useEffect(() => {
     const accessToken = localStorage.getItem("token");
 
+    setLoading(true); // Ensure loading is set to true at the start
     if (!accessToken) {
       setLoading(false);
       return;
     }
-
     const fetchUser = async () => {
       try {
-        const response = await axiosInstance.get(API_PATHS.auth.getProfile);
+        const response = await axiosInstance.get(API_PATHS.auth.getProfile); 
         setUser(response.data);
       } catch (error) {
         console.error("Error fetching user profile:", error);
-        // Only clear token if it's really unauthorized
-        if (error.response?.status === 401) {
-          localStorage.removeItem("token");
-        }
-
+        // localStorage.removeItem("token");
       } finally {
         setLoading(false);
       }
     };
 
     fetchUser();
-  }, []);
+  }, [localStorage.getItem("token")]);  // Add accessToken as a dependency
 
   const updateUser = (updatedUser) => {
     setUser(updatedUser);
@@ -41,13 +37,13 @@ const UserProvider = ({ children }) => {
     setLoading(false);
   };
 
-  const clearUser = () => {
-    setUser(null);
-    localStorage.removeItem("token");
-  };
+  // const clearUser = () => {
+  //   setUser(null);
+  //   localStorage.removeItem("token");
+  // };
 
   return (
-    <UserContext.Provider value={{ user, loading, updateUser, clearUser }}>
+    <UserContext.Provider value={{ user, loading, updateUser }}>
       {children}
     </UserContext.Provider>
   );

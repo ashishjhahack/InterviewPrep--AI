@@ -7,6 +7,7 @@ import Login from './pages/Login'
 import About from './pages/About'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import Dashboard from './pages/Dashboard';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
         <Route path='/interviews' element={<Interviews />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/about' element={<About />}></Route>
+        <Route path='/dashboard' element={<Dashboard />}></Route>
       </Routes>
       <Footer />
     </div>
